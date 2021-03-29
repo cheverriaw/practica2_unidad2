@@ -23,13 +23,13 @@ public class Container {
         return contents.remove(b);
     }
     
-//    public double getVolume(){
-//        int sum = 0;
-//        for(Package b : contents){
-//            sum += b.getVolume();
-//        }
-//        return sum;
-//    }
+    public double getVolume(){
+        int sum = 0;
+        for(Package b : contents){
+            sum += b.getVolume();
+        }
+        return sum;
+    }
     
     public int size(){
         return contents.size();
