@@ -5,40 +5,40 @@
  */
 package container;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 /**
  *
- * @author william
+ * @author nel500
  */
-public class ContainerTest extends TestCase{
-    private Container container = null;
-    private int num_Packages_To_Test = 5;
-    private Package[] b = null;
-    private double package_Unit_Volume = 10.0;
-    
-    public ContainerTest(String testName) {
-        super(testName);
-    }
-  
-    
-    @Override
-    protected void setUp() throws Exception{
-        assertTrue("Test case error, you must test at least 1 Package",num_Packages_To_Test > 0);
-        
-        //creamos el Packages que necesitamos
-        b = new Package[num_Packages_To_Test];
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            b[i] = new Package((i+1)*package_Unit_Volume);
-        }
-        //Ahora creamos el Container
-        container = new Container();
+public class ContainerTest {
+
+    static junit.framework.Test suite() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
-    protected void tearDown() throws Exception{
-        super.tearDown();
+    public ContainerTest() {
+    }
+    
+    @BeforeClass
+    public static void setUpClass() {
+    }
+    
+    @AfterClass
+    public static void tearDownClass() {
+    }
+    
+    @Before
+    public void setUp() {
+    }
+    
+    @After
+    public void tearDown() {
     }
 
     /**
@@ -47,12 +47,12 @@ public class ContainerTest extends TestCase{
     @Test
     public void testAdd() {
         System.out.println("add");
-        container.clear();
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            assertTrue("container.add(Package) failed to add a new Package",container.add(b[i]));
-            assertFalse("container.add(Package) seems to allow the same Package to be added twice", container.add(b[i]));
-            assertTrue("container does not contain a Package after it is supposed to have been added", container.contains(b[i]));
-        }
+        Package b = null;
+        Container instance = new Container();
+        boolean expResult = true;
+        boolean result = instance.add(b);
+        assertEquals(expResult, result);
+        
     }
 
     /**
@@ -61,26 +61,12 @@ public class ContainerTest extends TestCase{
     @Test
     public void testRemove() {
         System.out.println("remove");
-        container.clear();
-        assertFalse("container.remove(Package) should fail because Container is empty, but it didn't", container.remove(b[0]));
+        Package b = null;
+        Container instance = new Container();
+        boolean expResult = false;
+        boolean result = instance.remove(b);
+        assertEquals(expResult, result);
         
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            container.clear();
-            
-            for (int j=0; j<i; j++) {
-                container.add(b[j]);
-            }
-            
-            for (int j=0; j<i; j++) {
-                assertTrue("container.remove(Package) failed to remove a Package that is supposed to be inside", container.remove(b[j]));
-                assertFalse("container still contains a Package after it is supposed to have been removed!", container.contains(b[j]));
-            }
-            
-            for (int j=i; j<num_Packages_To_Test; j++) {
-                assertFalse("container.remove(Package) did not fail for a Package that is not inside", container.remove(b[j]));
-            }
-        }
-       
     }
 
     /**
@@ -89,21 +75,11 @@ public class ContainerTest extends TestCase{
     @Test
     public void testGetVolume() {
         System.out.println("getVolume");
+        Container instance = new Container();
         double expResult = 0.0;
-        double result = 0.0;
-        
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            expResult = expResult + b[i].getVolume();
-        }
-        
-        container.clear();
-        
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            container.add(b[i]);
-        }
-        
-        result = container.getVolume();
-        assertEquals(expResult, result);
+        double result = instance.getVolume();
+        assertEquals(expResult, result, 0.0);
+       
     }
 
     /**
@@ -112,14 +88,11 @@ public class ContainerTest extends TestCase{
     @Test
     public void testSize() {
         System.out.println("size");
+        Container instance = new Container();
+        int expResult = 0;
+        int result = instance.size();
+        assertEquals(expResult, result);
         
-        container.clear();
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            container.add(b[i]);
-        }
-        
-        int result = container.size();  
-        assertEquals(num_Packages_To_Test, result);
     }
 
     /**
@@ -128,7 +101,9 @@ public class ContainerTest extends TestCase{
     @Test
     public void testClear() {
         System.out.println("clear");
-        container.clear();
+        Container instance = new Container();
+        instance.clear();
+       
     }
 
     /**
@@ -137,14 +112,12 @@ public class ContainerTest extends TestCase{
     @Test
     public void testContains() {
         System.out.println("contains");
-        container.clear();
-        for (int i=0; i<num_Packages_To_Test; i++) {
-            container.add(b[i]);
-        }
-        
-        for (int i=0; i<num_Packages_To_Test-1; i++) {
-            assertTrue("container contains a Package",container.contains(b[i]));
-        }
-    }
+        Package b = null;
+        Container instance = new Container();
+        boolean expResult = false;
+        boolean result = instance.contains(b);
+        assertEquals(expResult, result);
        
+    }
+    
 }
