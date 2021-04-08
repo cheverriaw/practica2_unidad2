@@ -14,31 +14,32 @@ import static org.junit.Assert.*;
  *
  * @author william
  */
-public class ClientVideoClubServiceTest extends TestCase{
+public class ClientVideoClubServiceTest extends TestCase {
+
     private IVideoClubService remoteVideoClubServiceMock;
     private IVideo Video28Mock;
-    
+
     public ClientVideoClubServiceTest(String testName) {
         super(testName);
     }
-    
-    protected void setUp() throws Exception{
+
+    protected void setUp() throws Exception {
         super.setUp();
         Video28Mock = EasyMock.createMock(IVideo.class);
         remoteVideoClubServiceMock = EasyMock.createMock(IVideoClubService.class);
     }
-    
-    protected void tearDown() throws Exception{
+
+    protected void tearDown() throws Exception {
         super.tearDown();
     }
-    
+
     @Test
     public void testClientVideoClubService() {
         try {
             new ClientVideoClubService(null);
             fail("Expected IllegalArgumentException");
         } catch (IllegalArgumentException e) {
-        // expected
+            // expected
         }
         new ClientVideoClubService(remoteVideoClubServiceMock);
     }
@@ -47,8 +48,13 @@ public class ClientVideoClubServiceTest extends TestCase{
      * Test of getVideo method, of class ClientVideoClubService.
      */
     @Test
-    public void testGetVideo() throws Exception{
-        
+    public void testGetVideo() throws Exception {
+        EasyMock.expect(remoteVideoClubServiceMock.getVideo(28)).andReturn(Video28Mock);
+        EasyMock.replay(remoteVideoClubServiceMock);
+        IVideoClubService clientVideoClubService = new ClientVideoClubService(remoteVideoClubServiceMock);
+        IVideo result = clientVideoClubService.getVideo(28);
+        assertEquals(Video28Mock, result);
+        EasyMock.verify(remoteVideoClubServiceMock);
     }
-    
+
 }
