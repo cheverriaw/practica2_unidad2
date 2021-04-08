@@ -5,40 +5,27 @@
  */
 package container;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import junit.framework.TestCase;
 import org.junit.Test;
-import static org.junit.Assert.*;
+
 
 /**
  *
  * @author nel500
  */
-public class MainTest {
-
-    static junit.framework.Test suite() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public class MainTest extends TestCase {
     
     public MainTest() {
     }
     
-    @BeforeClass
-    public static void setUpClass() {
+    @Override
+    public void setUp() throws Exception {
+        super.setUp();
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+    @Override
+    public void tearDown() throws Exception {
+        super.tearDown();
     }
 
     /**
@@ -49,7 +36,6 @@ public class MainTest {
         System.out.println("main");
         String[] args = null;
         Main.main(args);
-       
     }
     
 }
